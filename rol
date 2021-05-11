@@ -1,0 +1,30 @@
+const { MessageEmbed } = require("discord.js");
+
+module.exports = {
+    name:'rol',
+    description:"rol veriyo",
+    async execute(message, args, discord, client) {
+        const channel = '841399525260263514';
+        const sarı = message.guild.roles.cache.find(role => role.name === "sarı");
+        const mavi = message.guild.roles.cache.find(role => role.name === "mavi");
+        
+        const sarıemoji = ':sunglasses:';
+        const maviemoji = ':1234:';
+
+        let embed = new MessageEmbed()
+            .setColor('#e42643')
+            .setTitle('bi rol al')
+            .setDescription('rol alıyorsun\n\n'
+            + `${sarıemoji} rolü almak için`
+            + `${maviemoji} rolü almak için`);
+
+        let MessageEmbed = await message.channel.send(embed);
+        MessageEmbed.react(sarıemoji);
+        MessageEmbed.react(maviemoji);
+
+        client.on('messageReactionAdd', async (reaction, user) => {
+            if (reaction.message.partial) await reaction.message.fetch();
+            
+        })
+    }
+}
