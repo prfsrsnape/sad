@@ -1,30 +1,130 @@
-const { MessageEmbed } = require("discord.js");
-
 module.exports = {
     name:'rol',
     description:"rol veriyo",
     async execute(message, args, discord, client) {
-        const channel = '841399525260263514';
-        const sarı = message.guild.roles.cache.find(role => role.name === "sarı");
-        const mavi = message.guild.roles.cache.find(role => role.name === "mavi");
-        
-        const sarıemoji = ':sunglasses:';
-        const maviemoji = ':1234:';
+        const channel = '841384988795469914';
+        const sayısal = message.guild.roles.cache.find(role => role.name === "Sayısal");
+        const sözel = message.guild.roles.cache.find(role => role.name === "Sözel");
+        const eşit = message.guild.roles.cache.find(role => role.name === "Eşit Ağırlık");
+        const dil = message.guild.roles.cache.find(role => role.name === "Dil");
+        const müzisyen = message.guild.roles.cache.find(role => role.name === "Müzisyen");
+        const ressam = message.guild.roles.cache.find(role => role.name === "Ressam");
+        const vokal = message.guild.roles.cache.find(role => role.name === "Vokal");
+        const sporcu = message.guild.roles.cache.find(role => role.name === "Sporcu");
 
-        let embed = new MessageEmbed()
-            .setColor('#e42643')
-            .setTitle('bi rol al')
-            .setDescription('rol alıyorsun\n\n'
-            + `${sarıemoji} rolü almak için`
-            + `${maviemoji} rolü almak için`);
+        const vokalemo = '🧑‍🎤';
+        const sayemo = '🧑‍🏫';
+        const ressemo = '🧑‍🎨';
+        const müzisyemo = '🎸';
+        const sporcemo = '🤸';
+        const sözelemo = '📚';
+        const eşitemo = '☯️';
+        const dilemo = '🤰';
 
-        let MessageEmbed = await message.channel.send(embed);
-        MessageEmbed.react(sarıemoji);
-        MessageEmbed.react(maviemoji);
+        let embed = new discord.MessageEmbed()
+        .setColor('#e42643')
+        .setTitle('Rol alma')
+        .setDescription('Aşağıdaki rollerden kendinize uygun olanları alabilirsiniz <3\n\n'
+        + `
+        vokal rolü için ${vokalemo}`
+        + `
+        müzisyen rolü için ${müzisyemo}`
+        + `
+        ressam rolü için ${ressemo}`
+        +  `
+        sayısal rolü için ${sayemo}`
+        + `
+        sözel rolü için ${sözelemo}`
+        + `
+        Eşit Ağırlık rolü için ${eşitemo}`
+        + `
+        Dil rolü için ${dilemo}`
+        + `
+        sporcu rolü için ${sporcemo} emojisine bas!!!` );
+
+        let messageEmbed = await message.channel.send(embed);
+        messageEmbed.react(vokalemo);
+        messageEmbed.react(müzisyemo);   
+        messageEmbed.react(ressemo);
+        messageEmbed.react(sayemo);
+        messageEmbed.react(sözelemo);
+        messageEmbed.react(eşitemo);
+        messageEmbed.react(dilemo);
+        messageEmbed.react(sporcemo);
 
         client.on('messageReactionAdd', async (reaction, user) => {
-            if (reaction.message.partial) await reaction.message.fetch();
-            
-        })
+            if(reaction.message.partial) await reaction.message.fetch();
+            if(reaction.partial) await reaction.fetch();
+            if(user.bot) return;
+            if(!reaction.message.guild) return;
+        
+            if(reaction.message.channel.id == channel ) {
+                if(reaction.emoji.name === vokalemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(vokal);
+                }
+               if(reaction.emoji.name === müzisyemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(müzisyen);
+                }
+               if(reaction.emoji.name === ressemo) {
+                await reaction.message.guild.members.cache.get(user.id).roles.add(ressam);
+                }
+                if(reaction.emoji.name === sayemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(sayısal);
+                }
+               if(reaction.emoji.name === sözelemo) {
+                await reaction.message.guild.members.cache.get(user.id).roles.add(sözel);
+                } 
+                if(reaction.emoji.name === eşitemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(eşit);
+                }
+                if(reaction.emoji.name === dilemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(dil);
+                }
+                if(reaction.emoji.name === sporcemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(sporcu);
+                }
+            } else {
+                return;
+            }
+        
+        });
+        client.on('messageReactionRemove', async (reaction, user) => {
+            if(reaction.message.partial) await reaction.message.fetch();
+            if(reaction.partial) await reaction.fetch();
+            if(user.bot) return;
+            if(!reaction.message.guild) return;
+        
+            if(reaction.message.channel.id == channel ) {
+                if(reaction.emoji.name === vokalemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(vokal);
+                }
+               if(reaction.emoji.name === müzisyemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(müzisyen);
+                }
+               if(reaction.emoji.name === ressemo) {
+                await reaction.message.guild.members.cache.get(user.id).roles.remove(ressam);
+                }
+                if(reaction.emoji.name === sayemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(sayısal);
+                }
+               if(reaction.emoji.name === sözelemo) {
+                await reaction.message.guild.members.cache.get(user.id).roles.remove(sözel);
+                } 
+                if(reaction.emoji.name === eşitemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(eşit);
+                }
+                if(reaction.emoji.name === dilemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(dil);
+                }
+                if(reaction.emoji.name === sporcemo) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(sporcu);
+                }
+            } else {
+                return;
+            }
+        
+        });
+
     }
+
 }
